@@ -1,20 +1,7 @@
 # 行为树节点日志
 
-用于将行为树各个节点的运行结果导出成json文件，供行为树可视化
-```json
-{
-    "frames": [
-        {
-            "frame_id": 帧数,
-            "list": [
-                [节点id, 状态编码, 提示消息],
-                ...
-            ]
-        },
-        ...
-    ]
-}
-```
+将行为树各个节点的运行结果导出成json文件，供行为树可视化， json格式请参考 [behavior3tracker运行时数据格式](http://10.100.2.56:9529/wilson/behavior3tracker/-/blame/master/README.MD#L4-L17)
+
 
 * 使用方式
 ```lua

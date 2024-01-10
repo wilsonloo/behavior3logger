@@ -1,6 +1,7 @@
-local Skynet = require "mynet"
+local Skynet = require "skynet"
 local Socket = require "skynet.socket"
-local Log = require "log"
+
+local sformat = string.format
 
 local mt = {}
 mt.__index = mt
@@ -16,13 +17,13 @@ function mt:check_alive()
 
     self.connecting = true
     Skynet.fork(function ()
-        Log.Infof("connecting to b3-tracker-server:%s:%d...", self.ip, self.port)
+        print(sformat("connecting to b3-tracker-server:%s:%d...", self.ip, self.port))
         local fd, errmsg = Socket.open(self.ip, self.port)
         assert(fd, errmsg)
 
         self.connecting = false
         self.fd = fd
-        Log.Info("b3-tracker-server connected")
+        print("b3-tracker-server connected")
 
         Socket.onclose(fd, function ()
             self.fd = nil
@@ -32,7 +33,7 @@ end
 
 function mt:send(data)
     if not self.fd then
-        Log.Warning("target fd invalid, send ignored")
+        print("target fd invalid, send ignored")
         return
     end
 
